@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Contact Planner</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>📇 Campus Contact Planner</h1>
+    <p>CSE341 - Week 2 Assignment | Contact Management</p>
+  </header>
+
+  <main>
+    <div id="contacts-container" class="grid">
+      <p>Loading contacts...</p>
+    </div>
+  </main>
+
+  <script>
+    async function loadContacts() {
+      const container = document.getElementById('contacts-container');
+      try {
+        // IMPORTANT: Call the API route, not /contacts
+        const res = await fetch('/api/contacts'); 
+        
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        
+        const contacts = await res.json();
+
+        if (contacts.length === 0) {
+          container.innerHTML = '<p>No contacts found. Add some in Postman!</p>';
+          return;
+        }
+
+        container.innerHTML = contacts.map(contact => `
+          <div class="card">
+            <div class="avatar">${contact.firstName[0]}${contact.lastName[0]}</div>
+            <h2>${contact.firstName} ${contact.lastName}</h2>
+            <p class="email">📧 ${contact.email}</p>
+            <p class="fav">💖 Favorite Color: ${contact.favoriteColor}</p>
+            <p class="bday">🎂 Birthday: ${new Date(contact.birthday).toLocaleDateString()}</p>
+          </div>
+        `).join('');
+
+      } catch (error) {
+        container.innerHTML = `<p style="color: #ffdddd; grid-column: 1 / -1;">Error loading contacts. Is your API running? ${error}</p>`;
+        console.error('Fetch error:', error);
+      }
+    }
+
+    loadContacts();
+  </script>
+</body>
+</html>

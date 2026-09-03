@@ -10,8 +10,10 @@ const initDb = (callback) => {
   }
   MongoClient.connect(process.env.MONGO_URI)
     .then((client) => {
-      database = client.db();
+      // FORCE IT TO USE cse341 NO MATTER WHAT .env SAYS
+      database = client.db('cse341'); 
       console.log('Connected to MongoDB');
+      console.log('Using DB:', database.databaseName); // This will confirm
       callback(null, database);
     })
     .catch((err) => {

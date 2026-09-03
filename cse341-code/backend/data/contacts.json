@@ -1,0 +1,23 @@
+[
+  {
+    "firstName": "Anisa",
+    "lastName": "Chokwenda",
+    "email": "anisa@email.com",
+    "favoriteColor": "Blue",
+    "birthday": "1995-04-10"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john@email.com",
+    "favoriteColor": "Green",
+    "birthday": "1990-01-22"
+  },
+  {
+    "firstName": "Sarah",
+    "lastName": "Smith",
+    "email": "sarah@email.com",
+    "favoriteColor": "Red",
+    "birthday": "1988-07-15"
+  }
+]

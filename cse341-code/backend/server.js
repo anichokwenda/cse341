@@ -13,13 +13,13 @@ app.use(express.json());
 // 1. SERVE PUBLIC FOLDER FIRST
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 2. /contacts PAGE 
+// 2. HTML PAGE ROUTE - shows all contacts
 app.get('/contacts', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // 3. API ROUTES WITH /api PREFIX
-app.use('/api', require('./routes')); // <-- CHANGED HERE
+app.use('/api', require('./routes')); // This makes your API: /api/contacts and /api/contacts/:id
 
 // Home page
 app.get('/', (req, res) => { res.send('CSE341 Contacts API is running'); });
@@ -28,6 +28,6 @@ initDb((err) => {
   if (err) console.log(err);
   else {
     console.log('Connected to MongoDB');
-    app.listen(port, () => console.log(`Server running on http://localhost:${port}/contacts`));
+    app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
   }
 });

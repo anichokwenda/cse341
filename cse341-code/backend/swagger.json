@@ -1,0 +1,69 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Contacts API",
+    "version": "1.0.0",
+    "description": "CSE 341 Contacts API"
+  },
+  "servers": [
+    { "url": "http://localhost:3000" }
+  ],
+  "paths": {
+    "/api/contacts": {
+      "get": {
+        "summary": "Get all contacts",
+        "tags": ["Contacts"],
+        "responses": {
+          "200": { "description": "List of all contacts" }
+        }
+      },
+      "post": {
+        "summary": "Create a new contact",
+        "tags": ["Contacts"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["firstName", "lastName", "email", "favoriteColor", "birthday"],
+                "properties": {
+                  "firstName": { "type": "string" },
+                  "lastName": { "type": "string" },
+                  "email": { "type": "string" },
+                  "favoriteColor": { "type": "string" },
+                  "birthday": { "type": "string", "format": "date" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Contact created" } }
+      }
+    },
+    "/api/contacts/{id}": {
+      "get": {
+        "summary": "Get one contact by ID",
+        "tags": ["Contacts"],
+        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "200": { "description": "A single contact" },
+          "404": { "description": "Contact not found" }
+        }
+      },
+      "put": {
+        "summary": "Update a contact by ID",
+        "tags": ["Contacts"],
+        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object" } } } },
+        "responses": { "204": { "description": "Contact updated" } }
+      },
+      "delete": {
+        "summary": "Delete a contact by ID",
+        "tags": ["Contacts"],
+        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Contact deleted" } }
+      }
+    }
+  }
+}

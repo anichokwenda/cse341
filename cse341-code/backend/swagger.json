@@ -3,7 +3,7 @@
   "info": {
     "title": "Contacts API",
     "version": "1.0.0",
-    "description": "CSE 341 Contacts API"
+    "description": "CSE 341 Contact API"
   },
   "servers": [
     { "url": "http://localhost:3000" }

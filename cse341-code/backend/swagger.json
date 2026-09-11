@@ -29,24 +29,33 @@
                 "type": "object",
                 "required": ["firstName", "lastName", "email", "favoriteColor", "birthday"],
                 "properties": {
-                  "firstName": { "type": "string" },
-                  "lastName": { "type": "string" },
-                  "email": { "type": "string" },
-                  "favoriteColor": { "type": "string" },
-                  "birthday": { "type": "string", "format": "date" }
+                  "firstName": { "type": "string", "example": "John" },
+                  "lastName": { "type": "string", "example": "Doe" },
+                  "email": { "type": "string", "example": "john.doe@email.com" },
+                  "favoriteColor": { "type": "string", "example": "Blue" },
+                  "birthday": { "type": "string", "format": "date", "example": "1995-08-15" }
                 }
               }
             }
           }
         },
-        "responses": { "201": { "description": "Contact created" } }
+        "responses": {
+          "201": { "description": "Contact created" }
+        }
       }
     },
     "/api/contacts/{id}": {
       "get": {
         "summary": "Get one contact by ID",
         "tags": ["Contacts"],
-        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
         "responses": {
           "200": { "description": "A single contact" },
           "404": { "description": "Contact not found" }
@@ -55,15 +64,50 @@
       "put": {
         "summary": "Update a contact by ID",
         "tags": ["Contacts"],
-        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }],
-        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object" } } } },
-        "responses": { "204": { "description": "Contact updated" } }
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["firstName", "lastName", "email", "favoriteColor", "birthday"],
+                "properties": {
+                  "firstName": { "type": "string", "example": "John" },
+                  "lastName": { "type": "string", "example": "Doe" },
+                  "email": { "type": "string", "example": "john.doe@email.com" },
+                  "favoriteColor": { "type": "string", "example": "Blue" },
+                  "birthday": { "type": "string", "format": "date", "example": "1995-08-15" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "Contact updated" }
+        }
       },
       "delete": {
         "summary": "Delete a contact by ID",
         "tags": ["Contacts"],
-        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }],
-        "responses": { "200": { "description": "Contact deleted" } }
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Contact deleted" }
+        }
       }
     }
   }
